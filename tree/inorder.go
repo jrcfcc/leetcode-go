@@ -7,20 +7,33 @@ package tree
 后序: 左右根
 */
 func inorderTraversal(root *TreeNode) []int {
-	var res = make([]int,0)
-	helper(root,res)
+	res = make([]int,0)
+	helper(root)
 	return res
 }
 
+var res []int
+func getMinimumDifference(root *TreeNode) int {
+	res = make([]int,0)
+	helper(root)
+	var min = res[1] - res[0]
+	for i:=2;i<len(res);i++{
+		if res[i] - res[i-1] < min {
+			min = res[i] - res[i-1]
+		}
+	}
+	return min
+}
+
 //递归
-func helper(root *TreeNode,res []int) {
+func helper(root *TreeNode) {
 	if root != nil {
 		if root.Left != nil {
-			helper(root.Left,res)
+			helper(root.Left)
 		}
 		res = append(res,root.Val)
 		if root.Right != nil {
-			helper(root.Right,res)
+			helper(root.Right)
 		}
 	}
 }

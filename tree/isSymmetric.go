@@ -42,13 +42,13 @@ func isMirror2(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
-	var quene = make([]*TreeNode,0)
-	quene = append(quene,root)
-	quene = append(quene,root)
-	for len(quene) > 0 {
-		root1 := quene[0]
-		root2 := quene[1]
-		quene = quene[2:]
+	var queue = make([]*TreeNode,0)
+	queue = append(queue,root)
+	queue = append(queue,root)
+	for len(queue) > 0 {
+		root1 := queue[0]
+		root2 := queue[1]
+		queue = queue[2:]
 		if root1 == nil && root2 == nil {
 			continue
 		}
@@ -58,11 +58,11 @@ func isMirror2(root *TreeNode) bool {
 		if root1.Val != root2.Val {
 			return false
 		}
-		quene = append(quene,root1.Left)
-		quene = append(quene,root2.Right)
+		queue = append(queue,root1.Left)
+		queue = append(queue,root2.Right)
 
-		quene = append(quene,root1.Right)
-		quene = append(quene,root2.Left)
+		queue = append(queue,root1.Right)
+		queue = append(queue,root2.Left)
 	}
 	return true
 }
