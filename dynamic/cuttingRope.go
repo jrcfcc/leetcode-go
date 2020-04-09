@@ -1,6 +1,8 @@
 package dynamic
 
-import "math"
+import (
+	"math/big"
+)
 
 /*
 给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m] 。
@@ -41,10 +43,26 @@ func cuttingRope2(n int) int {
 	}
 	var a,b = n/3,n%3
 	if b == 0 {
-		return int(math.Pow(float64(3),float64(a)))%1000000007
+		x := pow(big.NewInt(3),a)
+		return int(x.Mod(x,big.NewInt(1000000007)).Int64())
 	}
 	if b == 1 {
-		return int(math.Pow(float64(3),float64(a-1))) * 4%1000000007
+		x := pow(big.NewInt(3),a-1)
+		x.Mul(x,big.NewInt(4))
+		return int(x.Mod(x,big.NewInt(1000000007)).Int64())
 	}
-	return int(math.Pow(float64(3),float64(a))) * 2%1000000007
+	x := pow(big.NewInt(3),a)
+	x.Mul(x,big.NewInt(2))
+	return int(x.Mod(x,big.NewInt(1000000007)).Int64())
+}
+
+func pow(x *big.Int,y int) *big.Int {
+	if y == 0 {
+		return big.NewInt(1)
+	}
+	var res = big.NewInt(0).Set(x)
+	for i:=y;i>1;i--{
+		res = big.NewInt(0).Mul(x,res)
+	}
+	return res
 }

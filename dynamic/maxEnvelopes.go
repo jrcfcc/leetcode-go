@@ -13,5 +13,5 @@ package dynamic
 
 */
 func maxEnvelopes(envelopes [][]int) int {
-
+	return 0
 }

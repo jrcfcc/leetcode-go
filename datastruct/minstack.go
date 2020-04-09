@@ -8,7 +8,7 @@ type MinStack struct {
 
 
 /** initialize your data structure here. */
-func Constructor() MinStack {
+func ConstructorMinStack() MinStack {
 	return MinStack{s: []int{},helper: []int{}}
 }
 

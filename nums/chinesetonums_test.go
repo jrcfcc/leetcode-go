@@ -16,4 +16,7 @@ func Test_chinesetonums(t *testing.T) {
 		t.Errorf("expected 130200 got %d",a)
 	}
 	fmt.Println(len(strings.Split("一亿亿","亿")))
+
+	var max = ^uint(0) >> 1
+	fmt.Println(max)
 }
