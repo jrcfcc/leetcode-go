@@ -4,7 +4,6 @@ package tree
 /*
 给定一个二叉搜索树的根结点 root，返回树中任意两节点的差的最小值。
 */
-var res []int
 func minDiffInBST(root *TreeNode) int {
 	res = make([]int,0)
 	dfs(root)

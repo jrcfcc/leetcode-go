@@ -6,7 +6,7 @@ package arrays
 */
 /*
 解法一 暴力法,查找每个柱子能画出的最大面积
-高为当前柱子的高度,宽为从当前柱子往左右两边扩展的大于等于当前柱子高度的左右边界之查
+高为当前柱子的高度,宽为从当前柱子往左右两边扩展的大于等于当前柱子高度的左右边界之差
 */
 func largestRectangleArea(heights []int) int {
 	var l = len(heights)

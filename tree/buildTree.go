@@ -70,3 +70,32 @@ func recur(pre_root,in_left,in_right int) *TreeNode{
 	root.Right = recur(i - in_left + pre_root + 1,i + 1,in_right)
 	return root
 }
+
+
+
+
+var post []int
+var dictPost map[int]int
+func buildTreePost(inorder []int, postorder []int) *TreeNode {
+	post = postorder
+	dictPost = make(map[int]int)
+	for k,v := range inorder {
+		dictPost[v] = k
+	}
+	return build(len(postorder)-1,0,len(inorder)-1)
+}
+
+
+func build(postorder_root int, inorder_left,inorder_right int) *TreeNode {
+	if inorder_left > inorder_right {
+		return nil
+	}
+	var root = &TreeNode{Val:post[postorder_root]}
+	//根节点在中序遍历中的索引
+	var i = dictPost[post[postorder_root]]
+	//左子树的后续遍历根节点是根节点索引postorder_root-右子树长度-1
+	//右子树长度就是中序遍历右边界-中序遍历根索引inorder_right-i
+	root.Left = build(postorder_root-1-inorder_right+i,inorder_left,i-1)
+	root.Right = build(postorder_root-1,i+1,inorder_right)
+	return root
+}
